@@ -17,6 +17,8 @@ dns.setServers(['8.8.8.8', '8.8.4.4']);
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 import connectDB from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/error.middleware.js";
 
@@ -36,6 +38,9 @@ connectDB();
 
 const app = express();
 
+// Security headers
+app.use(helmet());
+
 // Middleware
 app.use(
   cors({
@@ -45,6 +50,26 @@ app.use(
 );
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
+
+// Rate limiting — general API limit
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 300, // requests per IP per window
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: "Too many requests, please try again later." },
+});
+app.use("/api", apiLimiter);
+
+// Stricter limit on auth routes (login/signup/forgot-password) to slow brute force
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 20, // attempts per IP per window
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: "Too many attempts, please try again later." },
+});
+app.use("/api/auth", authLimiter);
 
 // Health check
 app.get("/api/health", (req, res) => {

@@ -59,7 +59,7 @@ export const signup = asyncHandler(async (req, res) => {
 export const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  if (!email || !password) {
+  if (!email || !password || typeof email !== "string" || typeof password !== "string") {
     res.status(400);
     throw new Error("Please provide email and password");
   }
@@ -96,7 +96,7 @@ export const getMe = asyncHandler(async (req, res) => {
 export const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
 
-  if (!email) {
+  if (!email || typeof email !== "string") {
     res.status(400);
     throw new Error("Please provide your email");
   }
@@ -129,7 +129,7 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 export const resetPassword = asyncHandler(async (req, res) => {
   const { email, otp, password } = req.body;
 
-  if (!email || !otp || !password) {
+  if (!email || !otp || !password || typeof email !== "string" || typeof otp !== "string") {
     res.status(400);
     throw new Error("Please provide email, OTP, and new password");
   }
