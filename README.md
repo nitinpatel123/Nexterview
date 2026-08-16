@@ -1,5 +1,8 @@
-# Nexterview AI — Smart Placement & Career Portal
+# Nexterview
 
+🚀 **Live Demo:** https://nexterview-1.onrender.com
+
+# Nexterview AI — Smart Placement & Career Portal
 A full-stack, AI-powered placement platform built for students and colleges — combining resume building, ATS analysis, AI mock interviews, aptitude/coding tests, and placement analytics in one product.
 
 ## 🚀 Features
