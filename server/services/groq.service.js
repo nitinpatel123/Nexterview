@@ -2,8 +2,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const GROQ_MODEL = "llama-3.3-70b-versatile";
-
+// const GROQ_MODEL = "llama-3.3-70b-versatile";
+const GROQ_MODEL = "openai/gpt-oss-120b";
 /**
  * Core function to call Groq API with a prompt
  * @param {string} prompt

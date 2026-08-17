@@ -51,8 +51,7 @@ const Signup = () => {
               value={form.name}
               onChange={handleChange}
               className="w-full mt-1.5 px-3.5 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-400 focus:border-primary-400 focus:outline-none transition-colors text-sm"
-              placeholder="Nitin Patel"
-            />
+placeholder="Enter your full name"            />
           </div>
           <div>
             <label className="text-sm font-medium text-gray-700">Email</label>
